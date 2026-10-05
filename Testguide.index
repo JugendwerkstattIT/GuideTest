@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitaler Testguide</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #f0f2f5; }
+        .btn { display: inline-block; padding: 15px 25px; background: #007bff; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
+        #status { font-size: 1.2rem; margin-top: 30px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+    <h1>Willkommen beim digitalen Testguide!</h1>
+    <p>Bewege dich durch die gegend. Sobald du eine Station erreichst, erscheint hier der Link.</p>
+    
+    <div id="status">Suche GPS-Signal...</div>
+
+    <script>
+        // HIER tragen die Schüler die Daten aus der Online-Tabelle ein:
+        const stationen = [
+            { name: "Historisches Rathaus", lat: 53.2294, lon: 7.4512, url: "rathaus.html" },
+            { name: "Alter Marktplatz", lat: 53.2301, lon: 7.4530, url: "marktplatz.html" }
+        ];
+
+        // GPS-Abfrage starten
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(checkLocation, errorGPS, { enableHighAccuracy: true });
+        } else {
+            document.getElementById("status").innerHTML = "Dein Browser unterstützt kein GPS.";
+        }
+
+        function checkLocation(position) {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+            let gefunden = false;
+
+            for (let station of stationen) {
+                // Radius-Berechnung: ca. 30-50 Meter Abweichung erlaubt (0.0004 Grad)
+                if (Math.abs(userLat - station.lat) < 0.0004 && Math.abs(userLon - station.lon) < 0.0004) {
+                    document.getElementById("status").innerHTML = `
+                        🎉 Du bist da!<br>
+                        <a class="btn" href="${station.url}">Öffne Guide: ${station.name}</a>
+                    `;
+                    gefunden = true;
+                    break;
+                }
+            }
+
+            if (!gefunden) {
+                document.getElementById("status").innerHTML = "🚶 Laufe weiter zur nächsten Station...";
+            }
+        }
+
+        function errorGPS() {
+            document.getElementById("status").innerHTML = "Bitte aktiviere deinen Standort im Browser.";
+        }
+    </script>
+</body>
+</html>
