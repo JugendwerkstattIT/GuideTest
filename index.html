@@ -74,6 +74,12 @@
                 lat: 53.2209554,
                 lon: 7.4505346,
                 url: "hortensien.html"
+            },
+            {
+                name: "Holzhuette",
+                lat: 53.2211722,
+                lon: 7.4503898,
+                url: "holzhuette.html"
             }
         ];
 
@@ -108,7 +114,7 @@
 
         function berechneEntfernung(lat1, lon1, lat2, lon2) {
 
-            const R = 6371000; // Erdradius in Metern
+            const R = 6371000;
 
             const dLat = (lat2 - lat1) * Math.PI / 180;
             const dLon = (lon2 - lon1) * Math.PI / 180;
