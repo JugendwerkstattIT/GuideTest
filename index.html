@@ -1,3 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitaler Testguide</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #status {
+            font-size: 1.2rem;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Willkommen beim digitalen Testguide!</h1>
+
+    <p>
+        Bewege dich durch die Gegend. Sobald du eine Station erreichst,
+        erscheint hier der Link.
+    </p>
+
+    <div id="status">Suche GPS-Signal...</div>
+
+    <script>
+
+        // ==========================================
+        // STATIONEN
+        // ==========================================
+
+        const stationen = [
+            {
+                name: "Sammelpunkt",
+                lat: 53.2208128,
+                lon: 7.4507673,
+                url: "sammelpunkt.html"
+            },
+            {
+                name: "Steintrio",
+                lat: 53.2205462,
+                lon: 7.4517868,
+                url: "steintrio.html"
+             },
+             {
+                name: "Lavendel",
+                lat: 53.2209198
+                lon: 7.4505044
+                url: "lavendel.html"
+             },
+             {
+                name: "Hortensien",
+                lat: 53.2209554,
+                lon: 7.4505346,
+                url: "hortensien.html"
+             },
+        ];
+
+
+        // ==========================================
+        // GPS STARTEN
+        // ==========================================
+
+        if (navigator.geolocation) {
+
+            navigator.geolocation.watchPosition(
+                checkLocation,
                 errorGPS,
                 {
                     enableHighAccuracy: true,
