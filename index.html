@@ -62,19 +62,19 @@
                 lat: 53.2205462,
                 lon: 7.4517868,
                 url: "steintrio.html"
-             },
-             {
+            },
+            {
                 name: "Lavendel",
                 lat: 53.2209198,
                 lon: 7.4505044,
                 url: "lavendel.html"
-             },
-             {
+            },
+            {
                 name: "Hortensien",
                 lat: 53.2209554,
                 lon: 7.4505346,
                 url: "hortensien.html"
-             },
+            }
         ];
 
 
@@ -147,7 +147,7 @@
                     station.lon
                 );
 
-                // Nur innerhalb von 10 Metern
+                // 10 Meter Radius
                 if (entfernung <= 10) {
 
                     document.getElementById("status").innerHTML = `
@@ -163,8 +163,10 @@
             }
 
             if (!gefunden) {
+
                 document.getElementById("status").innerHTML =
                     "🚶 Laufe weiter zur nächsten Station...";
+
             }
         }
 
