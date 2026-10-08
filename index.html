@@ -4,58 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digitaler Testguide</title>
+
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background: #f0f2f5; }
-        .btn { display: inline-block; padding: 15px 25px; background: #007bff; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
-        #status { font-size: 1.2rem; margin-top: 30px; font-weight: bold; color: #333; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f0f2f5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #status {
+            font-size: 1.2rem;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
+
 <body>
+
     <h1>Willkommen beim digitalen Testguide!</h1>
-    <p>Bewege dich durch die gegend. Sobald du eine Station erreichst, erscheint hier der Link.</p>
-    
+
+    <p>
+        Bewege dich durch die Gegend. Sobald du eine Station erreichst,
+        erscheint hier der Link.
+    </p>
+
     <div id="status">Suche GPS-Signal...</div>
 
     <script>
-        // HIER tragen die Schüler die Daten aus der Online-Tabelle ein:
+
+        // ==========================================
+        // STATIONEN
+        // ==========================================
+
         const stationen = [
-            { name: "Sammelpunkt", lat: 53.2208128, lon: 7.4507673, url: "sammelpunkt.html" },
-            { name: "Steintrio", lat: 53.2205462, lon: 7.4517868, url: "steintrio.html" }
+            {
+                name: "Sammelpunkt",
+                lat: 53.2208128,
+                lon: 7.4507673,
+                url: "sammelpunkt.html"
+            },
+            {
+                name: "Steintrio",
+                lat: 53.2205462,
+                lon: 7.4517868,
+                url: "steintrio.html"
+            }
         ];
 
-        // GPS-Abfrage starten
+
+        // ==========================================
+        // GPS STARTEN
+        // ==========================================
+
         if (navigator.geolocation) {
-            navigator.geolocation.watchPosition(checkLocation, errorGPS, { enableHighAccuracy: true });
+
+            navigator.geolocation.watchPosition(
+                checkLocation,
+                errorGPS,
+                {
+                    enableHighAccuracy: true,
+                    maximumAge: 5000,
+                    timeout: 10000
+                }
+            );
+
         } else {
-            document.getElementById("status").innerHTML = "Dein Browser unterstützt kein GPS.";
+
+            document.getElementById("status").innerHTML =
+                "Dein Browser unterstützt kein GPS.";
+
         }
 
+
+        // ==========================================
+        // ENTFERNUNG ZWISCHEN ZWEI GPS-PUNKTEN
+        // ==========================================
+
+        function berechneEntfernung(lat1, lon1, lat2, lon2) {
+
+            const R = 6371000; // Erdradius in Metern
+
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+
+            const a =
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) *
+                Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon / 2) *
+                Math.sin(dLon / 2);
+
+            const c =
+                2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            return R * c;
+        }
+
+
+        // ==========================================
+        // STANDORT PRÜFEN
+        // ==========================================
+
         function checkLocation(position) {
+
             const userLat = position.coords.latitude;
             const userLon = position.coords.longitude;
+
             let gefunden = false;
 
             for (let station of stationen) {
-                // Radius-Berechnung: ca. 30-50 Meter Abweichung erlaubt (0.0004 Grad)
-                if (Math.abs(userLat - station.lat) < 0.0004 && Math.abs(userLon - station.lon) < 0.0004) {
+
+                const entfernung = berechneEntfernung(
+                    userLat,
+                    userLon,
+                    station.lat,
+                    station.lon
+                );
+
+                // Nur innerhalb von 15 Metern
+                if (entfernung <= 15) {
+
                     document.getElementById("status").innerHTML = `
                         🎉 Du bist da!<br>
-                        <a class="btn" href="${station.url}">Öffne Guide: ${station.name}</a>
+                        <a class="btn" href="${station.url}">
+                            Öffne Guide: ${station.name}
+                        </a>
                     `;
+
                     gefunden = true;
                     break;
                 }
             }
 
             if (!gefunden) {
-                document.getElementById("status").innerHTML = "🚶 Laufe weiter zur nächsten Station...";
+                document.getElementById("status").innerHTML =
+                    "🚶 Laufe weiter zur nächsten Station...";
             }
         }
 
-        function errorGPS() {
-            document.getElementById("status").innerHTML = "Bitte aktiviere deinen Standort im Browser.";
+
+        // ==========================================
+        // GPS FEHLER
+        // ==========================================
+
+        function errorGPS(error) {
+
+            if (error.code === 1) {
+
+                document.getElementById("status").innerHTML =
+                    "❌ Bitte erlaube der Webseite den Zugriff auf deinen Standort.";
+
+            } else if (error.code === 2) {
+
+                document.getElementById("status").innerHTML =
+                    "❌ Dein Standort konnte nicht ermittelt werden.";
+
+            } else if (error.code === 3) {
+
+                document.getElementById("status").innerHTML =
+                    "❌ Die Standortabfrage hat zu lange gedauert.";
+
+            } else {
+
+                document.getElementById("status").innerHTML =
+                    "❌ Fehler beim Abrufen des Standorts.";
+
+            }
         }
+
     </script>
+
 </body>
 </html>
-
