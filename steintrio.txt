@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- HIER: Der Name der Station für den Browser-Tab -->
+    <!-- HIER: Der Name der Station fÃ¼r den Browser-Tab -->
     <title>Station: Musterort</title> 
     <style>
         body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; padding: 20px; color: #333; background-color: #fafafa; }
@@ -17,32 +17,32 @@
 <body>
 
     <div class="container">
-        <!-- HIER: Die Überschrift der Station auf der Webseite -->
-        <h1>Das legendäre Stein-Trio</h1>
+        <!-- HIER: Die Ãœberschrift der Station auf der Webseite -->
+        <h1>Das legendÃ¤re Stein-Trio - so zumindest der (frei erfundenen) Saga nach.</h1>
 
-        <!-- HIER: Das Bild zur Station (Bilddatei muss später auch bei GitHub hochgeladen werden) -->
+        <!-- HIER: Das Bild zur Station (Bilddatei muss spÃ¤ter auch bei GitHub hochgeladen werden) -->
         <img src="steintrio.jpg" alt="Steintrio">
 
-        <!-- HIER: Der Infotext, den die Schüler recherchiert haben -->
+        <!-- HIER: Der Infotext, den die SchÃ¼ler recherchiert haben -->
         <p>
-           Hier stehen sie, die – die das sagenhafte Trio formen.
+           Hier stehen sie, die â€“ die das sagenhafte Trio formen.
            Massiv wie Stein, kalt wie Stein, standhaft wie Stein.
            Denn mehr als Stein sind diese drei Helden sowieso nicht.
-           Man könnte sich stundenlang über ihren Sinn & Zweck unterhalten.
-           Mal können sie als Ablagefläche dienen, mal als stützende Sitzfläche, wenn auch etwas kalt & hart – und mal dienen sie einfach als Fels (Stein..) in der Brandung, hier ggf. als Wachposten für Unbefugte.
-           Drüber zu urteilen oder gar zu schätzen, wie alt dieses kolossale Trio doch sein könnte, mag man sich lieber gar nicht erst annehmen.
+           Man kÃ¶nnte sich stundenlang Ã¼ber ihren Sinn & Zweck unterhalten.
+           Mal kÃ¶nnen sie als AblageflÃ¤che dienen, mal als stÃ¼tzende SitzflÃ¤che, wenn auch etwas kalt & hart â€“ und mal dienen sie einfach als Fels (Stein..) in der Brandung, hier ggf. als Wachposten fÃ¼r Unbefugte.
+           DrÃ¼ber zu urteilen oder gar zu schÃ¤tzen, wie alt dieses kolossale Trio doch sein kÃ¶nnte, mag man sich lieber gar nicht erst annehmen.
            Sie waren vor uns hier, sie bleiben auch nach uns hier.
-           Die drei Brüder im Gesteine.
+           Die drei BrÃ¼der im Gesteine.
 
         </p>
 
-        <!-- OPTIONAL: Falls die Schüler einen Audioguide aufgenommen haben (Löschen, falls nicht genutzt) -->
+        <!-- OPTIONAL: Falls die SchÃ¼ler einen Audioguide aufgenommen haben (LÃ¶schen, falls nicht genutzt) -->
         <div class="audio-box">
-            <p>?? <strong>Höre dir unseren Audioguide an:</strong></p>
-            <audio controls src="musterort-audio.mp3">Ihr Browser unterstützt das Audio-Element nicht.</audio>
+            <p>?? <strong>HÃ¶re dir unseren Audioguide an:</strong></p>
+            <audio controls src="musterort-audio.mp3">Ihr Browser unterstÃ¼tzt das Audio-Element nicht.</audio>
         </div>
 
-        <a class="back-btn" href="index.html">? Zurück zur Navigation</a>
+        <a class="back-btn" href="index.html">? ZurÃ¼ck zur Navigation</a>
     </div>
 
 </body>
