@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- HIER: Der Name der Station für den Browser-Tab -->
+    <title>Station: Lavendel</title> 
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; padding: 20px; color: #333; background-color: #fafafa; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        h1 { color: #007bff; border-bottom: 2px solid #eeeeeef; padding-bottom: 10px; }
+        img { max-width: 100%; height: auto; border-radius: 8px; margin: 15px 0; }
+        .audio-box { background: #f0f2f5; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center; }
+        .back-btn { display: inline-block; margin-top: 20px; color: #666; text-decoration: none; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HIER: Die Überschrift der Station auf der Webseite -->
+        <h1>Lavendel</h1>
+
+        <!-- HIER: Das Bild zur Station (Bilddatei muss später auch bei GitHub hochgeladen werden) -->
+        <img src="lavendel.jpg" alt="Lavendel">
+
+        <!-- HIER: Der Infotext, den die Schüler recherchiert haben -->
+        <p>
+            Willkommen an unserer ersten Station! Lavendel ist eine Pflanze, die man wahrscheinlich das ein oder 
+            andere mal gesehen hat. Besonders bekannt ist er für seine lila Blüten und seinen angenehmen Duft. 
+            Ursprünglich kommt Lavendel aus dem Mittelmeerraum. Dort ist es warm und trocken. Deshalb wächst Lavendel auch bei 
+            uns am liebsten an einem sonnigen und warmen Platz. Viel Wasser braucht er nicht, denn zu nasse Erde kann der Pflanze schaden.
+            Lavendel blüht meistens von Juni bis August und kann etwa 30 bis 100 Zentimeter groß werden. 
+            Damit er schön und kräftig bleibt, sollte man ihn regelmäßig zurückschneiden.
+            Viele Menschen verwenden Lavendel für Duftkissen, Seifen oder Parfüms. Außerdem ist die Pflanze bei 
+            Bienen, Hummeln und Schmetterlingen sehr beliebt, weil sie in den Blüten Nektar und Pollen finden. 
+            Lavendel sieht also nicht nur schön aus und riecht gut, sondern ist auch für die Natur wichtig.
+
+        </p>
+
+
+
+        <a class="back-btn" href="index.html">? Zurück zur Navigation</a>
+    </div>
+
+</body>
+</html>
