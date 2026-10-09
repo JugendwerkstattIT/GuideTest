@@ -45,7 +45,6 @@
     <div id="status">Suche GPS-Signal...</div>
 
     <script>
-
         // ==========================================
         // STATIONEN
         // ==========================================
@@ -80,16 +79,20 @@
                 lat: 53.2211722,
                 lon: 7.4503898,
                 url: "holzhuette.html"
+            },
+            {
+                name: "Baumgreis",
+                lat: 53.2213743,
+                lon: 7.4509306,
+                url: "baumgreis.html"
             }
         ];
-
 
         // ==========================================
         // GPS STARTEN
         // ==========================================
 
         if (navigator.geolocation) {
-
             navigator.geolocation.watchPosition(
                 checkLocation,
                 errorGPS,
@@ -99,21 +102,16 @@
                     timeout: 10000
                 }
             );
-
         } else {
-
             document.getElementById("status").innerHTML =
                 "Dein Browser unterstützt kein GPS.";
-
         }
 
-
         // ==========================================
-        // ENTFERNUNG ZWISCHEN ZWEI GPS-PUNKTEN
+        // ENTFERNUNG BERECHNEN
         // ==========================================
 
         function berechneEntfernung(lat1, lon1, lat2, lon2) {
-
             const R = 6371000;
 
             const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -132,20 +130,17 @@
             return R * c;
         }
 
-
         // ==========================================
         // STANDORT PRÜFEN
         // ==========================================
 
         function checkLocation(position) {
-
             const userLat = position.coords.latitude;
             const userLon = position.coords.longitude;
 
             let gefunden = false;
 
             for (let station of stationen) {
-
                 const entfernung = berechneEntfernung(
                     userLat,
                     userLon,
@@ -155,7 +150,6 @@
 
                 // 10 Meter Radius
                 if (entfernung <= 10) {
-
                     document.getElementById("status").innerHTML = `
                         🎉 Du bist da!<br>
                         <a class="btn" href="${station.url}">
@@ -169,43 +163,30 @@
             }
 
             if (!gefunden) {
-
                 document.getElementById("status").innerHTML =
                     "🚶 Laufe weiter zur nächsten Station...";
-
             }
         }
 
-
         // ==========================================
-        // GPS FEHLER
+        // GPS-FEHLER
         // ==========================================
 
         function errorGPS(error) {
-
             if (error.code === 1) {
-
                 document.getElementById("status").innerHTML =
                     "❌ Bitte erlaube der Webseite den Zugriff auf deinen Standort.";
-
             } else if (error.code === 2) {
-
                 document.getElementById("status").innerHTML =
                     "❌ Dein Standort konnte nicht ermittelt werden.";
-
             } else if (error.code === 3) {
-
                 document.getElementById("status").innerHTML =
                     "❌ Die Standortabfrage hat zu lange gedauert.";
-
             } else {
-
                 document.getElementById("status").innerHTML =
                     "❌ Fehler beim Abrufen des Standorts.";
-
             }
         }
-
     </script>
 
 </body>
